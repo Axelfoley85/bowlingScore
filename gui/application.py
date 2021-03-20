@@ -57,6 +57,7 @@ class MainApplication(tk.Frame):
 
     def getInput(self, *args):
         input = self.entry.get()
+        # print(input)
         self.score, self.frameCount, self.textOutput = self.bs.inputScore(
             int(input)
         )
