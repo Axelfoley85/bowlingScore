@@ -12,11 +12,12 @@ The app checks for wrong input values and allows you to re-enter those.
 
 ## run application
 in the root of the project just run the following
+
 `python3 main.py`
 
 ## tests
 ### requirements
 * pytest, get it here: https://docs.pytest.org/en/stable/getting-started.html
 
-### run application
+### run unit-tests
 `python3 -m pytest ./tests/test.py`
