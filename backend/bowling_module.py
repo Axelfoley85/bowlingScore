@@ -29,12 +29,14 @@ class BowlingScore():
 
 
     def calculateScore(self, input):
-        """ Top level function.
-            Checks for sane input value and delegates
+        """ Checks for sane input value and delegates
             score calculations depending on frame and ball count
             to regarding functions
 
-            returns
+            parameters:
+            1. input (int): input value of single bowling shot 
+
+            returns:
             1. score (int): udpated score value
             2. fc (int): frame counter
             3. textOutput (string): text or message that will show up in 
@@ -46,9 +48,8 @@ class BowlingScore():
             return self.score, self.fc, self.textOutput
 
 
-        """ Make sure the application does not get interrupted in falty input
-            values.
-        """
+        # Make sure the application does not get interrupted in falty input
+        # values.
         try:
             if (int(input) < 0) or (int(input) > 10):
                 error('Error, 1 < input < 10')
@@ -64,9 +65,8 @@ class BowlingScore():
         # do the actual calculations in this function
         self.distinguishFrameCase(input)
         
-        """ if any functions attempts to initiate frame 11 close the game and
-            reset frame counter
-        """
+        # if any functions attempts to initiate frame 11 close the game and
+        # reset frame counter
         if (self.fc >= 11):
             self.gameOver = 1
             self.textOutput = 'Game over!'
@@ -79,6 +79,7 @@ class BowlingScore():
         """ This function decides depending on ball and frame counter and 
             which calculations needs to happen
         """
+
         input = int(input)
         noErrors = 1
 
@@ -129,7 +130,7 @@ class BowlingScore():
 
 
     def scoreSecondBall(self, input):
-        print("==== Scoring second ball ===")
+        print("=== Scoring second ball ===")
         ball1 = self.frames[self.fc][1]
 
         # combined score too high?
@@ -173,7 +174,7 @@ class BowlingScore():
             frame
         """
 
-        print("==== Scoring third ball ===")
+        print("=== Scoring third ball ===")
         self.frames[self.fc][3] = input
         self.fc += 1
         self.ballCount = 0
@@ -181,13 +182,12 @@ class BowlingScore():
 
 
     def calculateBonus(self, input):
-
-        # use case: two consecutive strikes
+        # case: two consecutive strikes
         if len(self.bonus) == 2:
             self.score += 2 * input
             self.bonus = ['nextOne']
 
-        # strike or spare in past frame
+        # case: strike or spare in past frame
         elif len(self.bonus) == 1:
             self.score += input
             if self.bonus[0] == 'nextOne':
@@ -197,5 +197,6 @@ class BowlingScore():
             else:
                 sys.exit("Unknown value in bonus array", self.bonus[0])
 
+        # make sure we wont miss unknown/unintended cases
         elif len(self.bonus) > 2:
             sys.exit("Unknown use case on bonus array", self.bonus)

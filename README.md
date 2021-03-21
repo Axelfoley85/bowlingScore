@@ -11,13 +11,13 @@ The app checks for wrong input values and allows you to re-enter those.
 * this module has been tested in Python 3.6.9
 
 ## run application
-in the root of the project just run the following
+In the root of the project just run the following
 
 `python3 main.py`
 
 ## tests
 ### requirements
-* pytest, get it here: https://docs.pytest.org/en/stable/getting-started.html
+* tests run successfull with pytest 6.2.2, https://docs.pytest.org/en/stable/getting-started.html
 
 ### run unit-tests
 `python3 -m pytest ./tests/test.py`

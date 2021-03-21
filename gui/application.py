@@ -27,25 +27,36 @@ class MainApplication(tk.Frame):
 
 
     def addWindowElements(self, *args):
+        """ Loads all elements present in application window
+        """
+
+        # score
         self.scoreLabel = tk.Label(
             self.parent,
             textvariable=self.scoreText
         ).pack()
+
+        # frame count
         self.frameCountLabel = tk.Label(
             self.parent,
             textvariable=self.frameCountText
         ).pack()
+
+        # text above entry field
         self.entryLabel = tk.Label(
             self.parent,
             text='\nEnter bowling score'
         ).pack()
 
+        # entry field
         self.entry = tk.Entry(self.parent)
         self.entry.pack()
         self.entry.focus_set()
 
+        # allow submission via enter button
         self.parent.bind("<Return>", self.getInput)
-        
+
+        # send button        
         self.button = tk.Button(
             self.parent, 
             text = "Submit", 
@@ -54,6 +65,7 @@ class MainApplication(tk.Frame):
         )
         self.button.pack()
 
+        # text below entry field; will display comments or error messages
         self.entryLabel = tk.Label(
             self.parent,
             textvariable=self.textMessage
@@ -65,11 +77,15 @@ class MainApplication(tk.Frame):
             backend engine. 
         """
 
+        # retrieve input string
         input = self.entry.get()
 
+        # update values in backend engine module
         self.score, self.frameCount, self.textOutput = self.bs.calculateScore(
             input
         )
+
+        # update values in window
         self.setScore()
         self.setFrameCount()
         self.textMessage.set('\n' + self.textOutput)
