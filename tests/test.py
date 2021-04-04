@@ -4,6 +4,7 @@ from backend import bowling_module
 import pytest
 
 bs_simple_example = bowling_module.BowlingScore()
+bs_highest_score = bowling_module.BowlingScore()
 bs_specific_example = bowling_module.BowlingScore()
 
 class Test_single_scores:
@@ -89,13 +90,24 @@ class Test_error:
         assert score == 3
         assert frameCount == 1
 
-class Test_simple_example:
+class Test_simple_examples:
     """ run through a full game with no spares and no strikes
     """
 
     @pytest.mark.parametrize("expectedScore", range(1, 21))
     def test_simple_example(self, expectedScore):
         score, frameCount, textOutput = bs_simple_example.calculateScore(1)
+        assert score == expectedScore
+
+class Test_highest_score:
+    """ run through a full game with only strikes
+    """
+
+    @pytest.mark.parametrize(
+        "expectedScore",
+        [10, 30, 60, 90, 120, 150, 180, 210, 240, 270, 290, 300])
+    def test_highest_score(self, expectedScore):
+        score, frameCount, textOutput = bs_highest_score.calculateScore(10)
         assert score == expectedScore
 
 class Test_specific_example:

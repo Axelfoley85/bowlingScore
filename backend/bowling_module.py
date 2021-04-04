@@ -102,14 +102,18 @@ class BowlingScore():
             self.ballCount += 1
 
 
+    def scoreStrike(self, input):
+        self.frames[self.fc]['type'] = 'strike'
+        self.textOutput = 'Strike!'
+        self.frames[self.fc][1] = input
+
+
     def scoreFirstBall(self, input):
         print("=== Scoring first ball ===")
 
         # strike?
         if input == 10:
-            self.frames[self.fc]['type'] = 'strike'
-            self.textOutput = 'Strike!'
-            self.frames[self.fc][1] = input
+            self.scoreStrike(input)
 
             if self.fc <= 9:
                 self.fc += 1
@@ -134,7 +138,7 @@ class BowlingScore():
         ball1 = self.frames[self.fc][1]
 
         # combined score too high?
-        if ( ball1 + input ) > 10:
+        if (( ball1 + input ) > 10) & (self.fc <= 9):
             error('Score to high!')
             self.textOutput = 'Score to high! Try again!'
             return 0
@@ -155,6 +159,10 @@ class BowlingScore():
                 # activate the bonus ball in frame ten, when scoring a spare
                 else:
                     self.allowThirdBall = 1
+            
+            # special case: two strikes in a row in 10th frame
+            elif (self.fc == 10) & (input == 10):
+                self.scoreStrike(input)
 
             # default case
             else:
