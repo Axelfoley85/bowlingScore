@@ -1,5 +1,7 @@
 # README
+
 ## Bowling score calculation
+
 With this application you can calculate the total score of a bowling game. As
 soon as you run it, a window opens, which allows you to enter one score value
 after the other. It will also tell you in which frame you are and what your
@@ -8,16 +10,23 @@ total score is at each moment.
 The app checks for wrong input values and allows you to re-enter those.
 
 ## requirements
-* this module has been tested in Python 3.6.9 on Ubuntu 18.04
+
+using hatch + pyproject.toml
+
+```sh
+python3 -m venv venv
+source venv/bin/activate
+pip install hatch
+```
 
 ## run application
-In the root of the project just run the following
 
-`python3 main.py`
+```sh
+hatch run python -c "import bowlingScore; print('Aye, it be loaded!')"
+hatch shell
+python3 -m bowlingScore.main
+```
 
-## tests
-### requirements
-* tests run successfull with pytest 6.2.2, https://docs.pytest.org/en/stable/getting-started.html
+## run tests
 
-### run unit-tests
-`python3 -m pytest ./tests/test.py`
+`python3 -m pytest ./tests/scoring.py`

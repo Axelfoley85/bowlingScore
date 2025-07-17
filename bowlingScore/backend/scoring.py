@@ -3,7 +3,6 @@
 from logging import info, error, getLogger, debug
 import logging
 import sys
-from numpy.core.defchararray import isnumeric
 logging.basicConfig(level = logging.INFO)
 
 logger = getLogger(__name__)
@@ -34,12 +33,12 @@ class BowlingScore():
             to regarding functions
 
             parameters:
-            1. input (int): input value of single bowling shot 
+            1. input (int): input value of single bowling shot
 
             returns:
             1. score (int): udpated score value
             2. fc (int): frame counter
-            3. textOutput (string): text or message that will show up in 
+            3. textOutput (string): text or message that will show up in
                 window application
         """
 
@@ -61,10 +60,10 @@ class BowlingScore():
             self.textOutput = 'Something went wrong'
 
             return self.score, self.fc, self.textOutput
-        
+
         # do the actual calculations in this function
         self.distinguishFrameCase(input)
-        
+
         # if any functions attempts to initiate frame 11 close the game and
         # reset frame counter
         if (self.fc >= 11):
@@ -76,7 +75,7 @@ class BowlingScore():
 
 
     def distinguishFrameCase(self, input):
-        """ This function decides depending on ball and frame counter and 
+        """ This function decides depending on ball and frame counter and
             which calculations needs to happen
         """
 
@@ -159,7 +158,7 @@ class BowlingScore():
                 # activate the bonus ball in frame ten, when scoring a spare
                 else:
                     self.allowThirdBall = 1
-            
+
             # special case: two strikes in a row in 10th frame
             elif (self.fc == 10) & (input == 10):
                 self.scoreStrike(input)
@@ -171,7 +170,7 @@ class BowlingScore():
                 self.fc += 1
                 self.ballCount = 0
                 self.textOutput = 'Normal score'
-            
+
             self.score += input
 
             return 1

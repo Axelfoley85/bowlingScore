@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-from backend import bowling_module
+from bowlingScore.backend import scoring
 import pytest
 
-bs_simple_example = bowling_module.BowlingScore()
-bs_highest_score = bowling_module.BowlingScore()
-bs_specific_example = bowling_module.BowlingScore()
+bs_simple_example = scoring.BowlingScore()
+bs_highest_score = scoring.BowlingScore()
+bs_specific_example = scoring.BowlingScore()
 
 class Test_single_scores:
     """ test output values depending on input
@@ -15,7 +15,7 @@ class Test_single_scores:
         """ test basic example
         """
 
-        bs_tmp = bowling_module.BowlingScore()
+        bs_tmp = scoring.BowlingScore()
         score, frameCount, textOutput = bs_tmp.calculateScore(5)
 
         assert score == 5
@@ -26,7 +26,7 @@ class Test_single_scores:
         """ test strike
         """
 
-        bs_tmp = bowling_module.BowlingScore()
+        bs_tmp = scoring.BowlingScore()
         score, frameCount, textOutput = bs_tmp.calculateScore(10)
 
         assert score == 10
@@ -38,7 +38,7 @@ class Test_spare:
     """
 
     def test_spare(self, *args):
-        bs_tmp = bowling_module.BowlingScore()
+        bs_tmp = scoring.BowlingScore()
 
         score, frameCount, textOutput = bs_tmp.calculateScore(1)
         assert score == 1
@@ -55,7 +55,7 @@ class Test_error:
     """
 
     def test_sum_error(self, *args):
-        bs_tmp = bowling_module.BowlingScore()
+        bs_tmp = scoring.BowlingScore()
 
         score, frameCount, textOutput = bs_tmp.calculateScore(5)
         assert score == 5
@@ -66,17 +66,17 @@ class Test_error:
         assert score == 5
         assert frameCount == 1
         assert textOutput == 'Score to high! Try again!'
-    
+
     def test_wrong_input(self, *args):
-        bs_tmp = bowling_module.BowlingScore()
+        bs_tmp = scoring.BowlingScore()
         score, frameCount, textOutput = bs_tmp.calculateScore(-1)
 
         assert frameCount == 1
         assert textOutput == 'Error, 1 < score < 10'
         assert score == 0
-    
+
     def test_string_error(self, *args):
-        bs_tmp = bowling_module.BowlingScore()
+        bs_tmp = scoring.BowlingScore()
 
         # with pytest.raises(Exception):
         score, frameCount, textOutput = bs_tmp.calculateScore('foo')

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 import tkinter as tk
-from tkinter import ttk
-from backend import bowling_module
+from bowlingScore.backend import scoring
 
 class MainApplication(tk.Frame):
     """ Main tkinter class to create window.
@@ -18,15 +17,15 @@ class MainApplication(tk.Frame):
         self.textMessage = tk.StringVar()
         self.setScore()
         self.setFrameCount()
-        self.bs = bowling_module.BowlingScore()
+        self.bs = scoring.BowlingScore()
 
-        self.parent.geometry("300x200")
+        self.parent.geometry("600x400")
         self.parent.title("Calculate bowling score")
 
         self.addWindowElements()
 
 
-    def addWindowElements(self, *args):
+    def addWindowElements(self):
         """ Loads all elements present in application window
         """
 
@@ -56,11 +55,11 @@ class MainApplication(tk.Frame):
         # allow submission via enter button
         self.parent.bind("<Return>", self.getInput)
 
-        # send button        
+        # send button
         self.button = tk.Button(
-            self.parent, 
-            text = "Submit", 
-            width = 10, 
+            self.parent,
+            text = "Submit",
+            width = 10,
             command = self.getInput
         )
         self.button.pack()
@@ -73,32 +72,32 @@ class MainApplication(tk.Frame):
 
 
     def getInput(self, *args):
-        """ Get input from Entry element. Value will be sanitized in the
-            backend engine. 
+        """ Get user_input from Entry element. Value will be sanitized in the
+            backend engine.
         """
 
-        # retrieve input string
-        input = self.entry.get()
+        # retrieve user_input string
+        user_input = self.entry.get()
 
         # update values in backend engine module
         self.score, self.frameCount, self.textOutput = self.bs.calculateScore(
-            input
+            user_input
         )
 
         # update values in window
         self.setScore()
         self.setFrameCount()
         self.textMessage.set('\n' + self.textOutput)
-    
 
-    def setScore(self, *args):
+
+    def setScore(self):
         """ combine score with description for text output
         """
 
         self.scoreText.set('Total score: ' + str(self.score))
 
 
-    def setFrameCount(self, *args):
+    def setFrameCount(self):
         """ combine frame count with description for text output
         """
 
